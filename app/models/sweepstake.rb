@@ -1,6 +1,7 @@
 class Sweepstake < ApplicationRecord
   belongs_to :user
   belongs_to :tournament
+  has_many :competitors, through: :tournament
   has_many :participants
 
   validates :name, :starting_at, :ending_at, :tournament, presence: true

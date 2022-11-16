@@ -6,6 +6,7 @@ class SweepstakesController < ApplicationController
   end
 
   def show
-    @sweepstake = Sweepstake.find(params[:id])
+    @sweepstake = Sweepstake.joins(:competitors).find(params[:id])
+    @competitors = @sweepstake.competitors.group_by(&:group)
   end
 end

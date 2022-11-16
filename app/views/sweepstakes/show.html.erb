@@ -1,6 +1,21 @@
 <div class="container">
+  <h1 class='text-center'><%= @sweepstake.name %></h1>
   <div class="row mt-3">
-    <div class="col-3"></div>
+    <% @competitors.each do |group, competitors| %>
+      <div class="col-3 mb-3">
+        <p class="px-4 py-2 mb-0 border rounded bg-white">Group <%= group %></p>
+        <ol class="list-group list-group-numbered">
+          <% competitors.each do |competitor| %>
+            <li class="list-group-item d-flex justify-content-between align-items-start border-top-0">
+              <div class="ms-2 me-auto">
+                <div class="fw-bold"><%= competitor.name %></div>
+                Cras justo odio
+              </div>
+              <span class="badge bg-primary rounded-pill">14</span>
+            </li>
+          <% end %>
+        </ol>
+      </div>
+    <% end %>
   </div>
 </div>
-<h1><%= @sweepstake.name %></h1>
