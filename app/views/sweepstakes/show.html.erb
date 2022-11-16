@@ -1,7 +1,10 @@
 <div class="container">
-  <h1 class='text-center'><%= @sweepstake.name %></h1>
+  <div class="d-flex px-4 py-2 justify-content-between align-items-center">
+    <h1 class='text-center'><%= @sweepstake.name %></h1>
+    <%= link_to 'Participar', '#', class: 'btn btn-primary' %>
+  </div>
   <div class="row">
-    <ul class="nav nav-tabs">
+    <ul class="nav nav-tabs justify-content-center">
       <li class="nav-item">
         <%= link_to 'Classificação', sweepstake_path(@sweepstake), class:"nav-link active", aria_current: "page"  %>
       </li>
