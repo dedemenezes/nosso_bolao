@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_11_16_081709) do
+ActiveRecord::Schema[7.0].define(version: 2022_11_16_101416) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -22,6 +22,18 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_16_081709) do
     t.string "name"
     t.string "img_url"
     t.index ["tournament_id"], name: "index_competitors_on_tournament_id"
+  end
+
+  create_table "match_bets", force: :cascade do |t|
+    t.bigint "match_id", null: false
+    t.bigint "participant_id", null: false
+    t.integer "home_score"
+    t.integer "away_score"
+    t.integer "final_result", default: 0
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["match_id"], name: "index_match_bets_on_match_id"
+    t.index ["participant_id"], name: "index_match_bets_on_participant_id"
   end
 
   create_table "matches", force: :cascade do |t|
@@ -95,6 +107,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_16_081709) do
   end
 
   add_foreign_key "competitors", "tournaments"
+  add_foreign_key "match_bets", "matches"
+  add_foreign_key "match_bets", "participants"
   add_foreign_key "matches", "competitors", column: "away_competitor_id"
   add_foreign_key "matches", "competitors", column: "home_competitor_id"
   add_foreign_key "matches", "tournaments"
