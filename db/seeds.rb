@@ -18,11 +18,6 @@ end
 
 puts 'Start seeds..'
 
-Dir[File.join(Rails.root, 'db', 'base_seeds', '*.rb')].sort.each do |seed|
-  load seed
-end
-
-
 puts "Users..."
 User.create! nickname: 'Dede', email: 'dede@lw.com', password: 123456
 User.create! nickname: 'Babi', email: 'babi@lw.com', password: 123456
@@ -32,8 +27,11 @@ puts 'Tournaments...'
 wc = Tournament.create! name: 'World Cup 2022'
 puts wc.name + ' created!'
 
+Dir[File.join(Rails.root, 'db', 'base_seeds', '*.rb')].sort.each do |seed|
+  load seed
+end
 Team.all.each do |team|
-  Competitor.create! team: team, tournament: wc
+  Competitor.create! 
 end
 
 puts 'Sweepstakes..'

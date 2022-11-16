@@ -10,7 +10,7 @@ end
 
 def create_teams(countries)
   countries.each do |country|
-    Team.create! name: country['name_en'], img_url: country['flag']
+    Competitor.create! name: country['name_en'], img_url: country['flag'], tournament: wc
   end
   puts "Teams created: #{Team.count}"
 end
