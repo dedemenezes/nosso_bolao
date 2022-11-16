@@ -10,20 +10,29 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_11_16_054607) do
+ActiveRecord::Schema[7.0].define(version: 2022_11_16_060522) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "competitors", force: :cascade do |t|
+    t.bigint "tournament_id", null: false
+    t.bigint "team_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["team_id"], name: "index_competitors_on_team_id"
+    t.index ["tournament_id"], name: "index_competitors_on_tournament_id"
+  end
 
   create_table "participants", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.bigint "sweepstake_id", null: false
     t.boolean "paid", default: false
     t.integer "price"
-    t.bigint "team_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "competitor_id"
+    t.index ["competitor_id"], name: "index_participants_on_competitor_id"
     t.index ["sweepstake_id"], name: "index_participants_on_sweepstake_id"
-    t.index ["team_id"], name: "index_participants_on_team_id"
     t.index ["user_id"], name: "index_participants_on_user_id"
   end
 
@@ -45,6 +54,12 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_16_054607) do
     t.string "img_url"
   end
 
+  create_table "tournaments", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -58,8 +73,10 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_16_054607) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "competitors", "teams"
+  add_foreign_key "competitors", "tournaments"
+  add_foreign_key "participants", "competitors"
   add_foreign_key "participants", "sweepstakes"
-  add_foreign_key "participants", "teams"
   add_foreign_key "participants", "users"
   add_foreign_key "sweepstakes", "users"
 end
