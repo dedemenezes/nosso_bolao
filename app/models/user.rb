@@ -5,4 +5,6 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
   has_many :participants
+  has_many :sweepstakes
+  validates :nickname, length: { minimum: 3 }
 end
