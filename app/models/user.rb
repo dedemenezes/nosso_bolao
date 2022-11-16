@@ -4,7 +4,7 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
-  has_many :participants
+  has_one :participant
   has_many :sweepstakes
   validates :nickname, length: { minimum: 3 }
 end

@@ -4,5 +4,8 @@
 
 import { application } from "./application"
 
+import DisplayMatchBetFormController from "./display_match_bet_form_controller"
+application.register("display-match-bet-form", DisplayMatchBetFormController)
+
 import HelloController from "./hello_controller"
 application.register("hello", HelloController)

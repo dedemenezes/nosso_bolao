@@ -6,6 +6,14 @@ class MatchBetPolicy < ApplicationPolicy
     # end
   end
 
+  def edit?
+    create?
+  end
+
+  def update?
+    create?
+  end
+
   def create?
     record.participant.user.id == user.id
   end

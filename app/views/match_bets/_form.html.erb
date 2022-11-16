@@ -1,0 +1,24 @@
+<%= simple_form_for [match, match_bet], html: { class: 'row' } do |f| %>
+  <div class="col-6">
+    <div class="mb-3">
+      <%= f.input :home_score, label: 'Home', input_html: { min: 0, step: 1 } %>
+    </div>
+  </div>
+  <div class="col-6">
+    <div class="mb-3">
+      <%= f.input :away_score, label: 'Away', input_html: { min: 0, step: 1 } %>
+    </div>
+  </div>
+  <div class="col-12 text-center d-flex justify-content-around">
+    <% if match_bet.new_record? %>
+      <%= f.submit 'Confirm', class: 'btn btn-primary' %>
+    <% else %>
+      <button class="btn btn-warning"
+              data-display-match-bet-form-target='cancel'
+              data-action='click->display-match-bet-form#closeForm'>
+        Cancel
+      </button>
+      <%= f.submit 'Update' %>
+    <% end %>
+  </div>
+<% end %>

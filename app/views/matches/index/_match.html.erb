@@ -4,23 +4,21 @@
       <p class="mb-2 text-muted">
         Group <%= match.group %>
       </p>
-      <div class="row">
+      <div class="row justify-content-center">
         <%= render 'matches/index/teams', match: match %>
-        <div class="col-4">
-          <%= simple_form_for [match, match_bet], html: { class: 'row' } do |f| %>
-            <div class="col-6">
-              <div class="mb-3">
-                <%= f.input :home_score, label: 'Home', input_html: { min: 0, step: 1 } %>
-              </div>
-            </div>
-            <div class="col-6">
-              <div class="mb-3">
-                <%= f.input :away_score, label: 'Away', input_html: { min: 0, step: 1 } %>
-              </div>
-            </div>
-            <div class="col-12 text-center">
-              <%= f.submit %>
-            </div>
+        <div class="col-4 text-center"
+             data-controller='display-match-bet-form'
+             data-display-match-bet-form-match-id-value="<%= match.id %>"
+             data-display-match-bet-form-match-bet-id-value="<%= current_user.participant.match_bet(match).id %>">
+          <% if MatchBet.already_bet?(match, current_user.participant) %>
+            <button class="btn btn-secondary"
+                    data-display-match-bet-form-target='btn'
+                    data-action='click->display-match-bet-form#openForm'>
+              update bet?
+            </button>
+            <div data-display-match-bet-form-target='display'></div>
+          <% else %>
+            <%= render 'match_bets/form', match: match, match_bet: current_user.participant.match_bet(match) %>
           <% end %>
         </div>
         <%= render 'matches/index/local_date', match: match %>
@@ -28,3 +26,6 @@
     </div>
   </div>
 </div>
+<% if false %>
+  <%= render 'match_bets/form', match: match, match_bet: current_user.participant.match_bet(match) %>
+<% end %>

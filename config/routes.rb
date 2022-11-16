@@ -7,6 +7,6 @@ Rails.application.routes.draw do
   resources :participants, only: %i[new create]
 
   resources :matches, only: [] do
-    resources :match_bets, only: :create
+    resources :match_bets, only: %i[create update edit]
   end
 end
