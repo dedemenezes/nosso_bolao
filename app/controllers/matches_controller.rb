@@ -1,6 +1,6 @@
 class MatchesController < ApplicationController
   def index
-    @sweepstake = Sweepstake.find(params[:sweepstake])
-    @matches = policy_scope(Match).where(tournament: @sweepstake.tournament)
+    @matches = policy_scope(Match).sort_by(&:local_date)
+    @tournament = @matches.first.tournament
   end
 end

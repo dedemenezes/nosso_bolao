@@ -1,0 +1,16 @@
+<div class="row">
+  <ul class="nav nav-tabs justify-content-center">
+    <li class="nav-item">
+      <%= link_to 'Classificação', tournament_path(tournament), class:"nav-link #{params[:controller] =~ /tournament/ ? 'active' : ''}", aria_current: "page"  %>
+    </li>
+    <li class="nav-item">
+      <%= link_to 'Partidas', tournament_matches_path(tournament), class: "nav-link #{params[:controller] =~ /match/ ? 'active' : ''}" %>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="#">Link</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+    </li>
+  </ul>
+</div>

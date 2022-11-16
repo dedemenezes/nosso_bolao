@@ -1,8 +1,8 @@
 Rails.application.routes.draw do
   devise_for :users
   root to: "pages#home"
-  resources :sweepstakes, only: :show do
-    resources :participants, only: %i[new create]
+  resources :tournaments, only: :show do
+    resources :matches, only: :index
   end
-  resources :matches, only: :index
+  resources :participants, only: %i[new create]
 end

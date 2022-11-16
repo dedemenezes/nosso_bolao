@@ -1,0 +1,29 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <div class="px-3 py-2 border rounded my-3">
+      <p class="mb-2 text-muted">
+        Group <%= match.group %>
+      </p>
+      <div class="row">
+        <%= render 'matches/index/teams', match: match %>
+        <div class="col-4">
+          <form action="#" class='row'>
+            <div class="col-6">
+              <div class="mb-3">
+                <label for="homeTeam" class="form-label">Home</label>
+                <input type="home_score" class="form-control" id="homeTeam" aria-describedby="homeTeamScore">
+              </div>
+            </div>
+            <div class="col-6">
+              <div class="mb-3">
+                <label for="awayTeam" class="form-label">Away</label>
+                <input type="away_score" class="form-control" id="awayTeam" aria-describedby="awayTeamScore">
+              </div>
+            </div>
+          </form>
+        </div>
+        <%= render 'matches/index/local_date', match: match %>
+      </div>
+    </div>
+  </div>
+</div>

@@ -6,7 +6,7 @@ class ParticipantsController < ApplicationController
   end
 
   def create
-    @sweepstake = Sweepstake.find(params[:sweepstake_id])
+    @sweepstake = Sweepstake.first
     @participant = Participant.new(participant_params)
     @participant.price = 5000
     @participant.paid = true
@@ -14,7 +14,7 @@ class ParticipantsController < ApplicationController
     @participant.sweepstake = @sweepstake
     authorize @participant
     if @participant.save!
-      redirect_to sweepstake_path(@sweepstake)
+      redirect_to tournament_path(@sweepstake.tournament)
     else
       render 'sweepstakes/show'
     end
