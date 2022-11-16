@@ -12,6 +12,7 @@ class ParticipantsController < ApplicationController
     @participant.paid = true
     @participant.user = current_user
     @participant.sweepstake = @sweepstake
+    authorize @participant
     if @participant.save!
       redirect_to sweepstake_path(@sweepstake)
     else

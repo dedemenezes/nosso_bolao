@@ -9,5 +9,6 @@ class SweepstakesController < ApplicationController
     @sweepstake = Sweepstake.joins(:competitors).find(params[:id])
     @participant = Participant.new
     @competitors = @sweepstake.competitors.group_by(&:group).sort_by(&:first)
+    authorize @sweepstake
   end
 end
