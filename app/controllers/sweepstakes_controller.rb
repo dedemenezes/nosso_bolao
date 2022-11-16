@@ -7,6 +7,7 @@ class SweepstakesController < ApplicationController
 
   def show
     @sweepstake = Sweepstake.joins(:competitors).find(params[:id])
+    @participant = Participant.new
     @competitors = @sweepstake.competitors.group_by(&:group).sort_by(&:first)
   end
 end
