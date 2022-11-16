@@ -23,7 +23,6 @@ end
 data = fetch_api('http://api.cup2022.ir/api/v1/match')
 wc = Tournament.first
 data['data'].each do |match|
-  binding.pry
   home = Competitor.find_by_name(match['home_team_en'])
   away = Competitor.find_by_name(match['away_team_en'])
   Match.create!(
