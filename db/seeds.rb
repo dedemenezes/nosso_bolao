@@ -26,12 +26,18 @@ User.create! nickname: 'Dede', email: 'dede@lw.com', password: 123456
 User.create! nickname: 'Babi', email: 'babi@lw.com', password: 123456
 puts "Users created: #{User.count}"
 
+puts 'Tournaments...'
+wc = Tournament.create! name: 'World Cup 2022'
+puts wc.name + ' created!'
+
+
 puts 'Sweepstakes..'
 swst = Sweepstake.create(
   name: 'Nosso Bolao',
   starting_at: Date.today,
   ending_at: Date.today + 30,
   user: User.first
+  tournament: 
 )
 
 puts swst.name + ' created!'

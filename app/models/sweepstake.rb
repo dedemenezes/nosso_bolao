@@ -3,7 +3,7 @@ class Sweepstake < ApplicationRecord
   belongs_to :tournament
   has_many :participants
 
-  validates :name, :starting_at, :ending_at, presence: true
+  validates :name, :starting_at, :ending_at, :tournament, presence: true
   validate :ending_at_cannot_be_in_the_past,
     :starting_at_cannot_be_greater_than_ending_at
 
