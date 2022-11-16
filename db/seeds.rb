@@ -8,9 +8,11 @@
 
 puts 'Cleaning DB...'
 if Rails.env.development?
-  Team.destroy_all
   Participant.destroy_all
+  Competitor.destroy_all
   Sweepstake.destroy_all
+  Tournament.destroy_all
+  Team.destroy_all
   User.destroy_all
 end
 
@@ -30,14 +32,17 @@ puts 'Tournaments...'
 wc = Tournament.create! name: 'World Cup 2022'
 puts wc.name + ' created!'
 
+Team.all.each do |team|
+  Competitor.create! team: team, tournament: wc
+end
 
 puts 'Sweepstakes..'
 swst = Sweepstake.create(
   name: 'Nosso Bolao',
   starting_at: Date.today,
   ending_at: Date.today + 30,
-  user: User.first
-  tournament: 
+  user: User.first,
+  tournament: wc
 )
 
 puts swst.name + ' created!'
@@ -48,7 +53,7 @@ Participant.create!(
   user: User.first,
   sweepstake: swst,
   price: 5000,
-  team: Team.find_by_name('Brazil'),
+  competitor: Competitor.all.sample,
   paid: true
 )
 
@@ -56,7 +61,7 @@ Participant.create!(
   user: User.last,
   sweepstake: swst,
   price: 5000,
-  team: Team.find_by_name('England'),
+  competitor: Competitor.all.sample,
   paid: true
 )
 
