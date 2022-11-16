@@ -20,8 +20,26 @@ end
 # data = fetch_api('http://api.cup2022.ir/api/v1/team')
 # create_teams data["data"]
 
-p fetch_api('http://api.cup2022.ir/api/v1/match')
-
+data = fetch_api('http://api.cup2022.ir/api/v1/match')
+wc = Tournament.first
+data['data'].each do |match|
+  binding.pry
+  home = Competitor.find_by_name(match['home_team_en'])
+  away = Competitor.find_by_name(match['away_team_en'])
+  Match.create!(
+    away_score: match['away_score'],
+    away_competitor: away,
+    home_competitor: home,
+    finished: match['finished'],
+    group: match['group'],
+    home_score: match['home_score'],
+    local_date: match['local_date'],
+    matchday: match['matchday'],
+    match_type: match['type'],
+    tournament: wc
+  )
+  p Match.last
+end
 # {"_id"=>"629c9c8a5749c4077500eb03",
 # "away_score"=>0,
 # "away_scorers"=>["null"],

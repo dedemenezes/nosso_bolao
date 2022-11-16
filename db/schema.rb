@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_11_16_062513) do
+ActiveRecord::Schema[7.0].define(version: 2022_11_16_081709) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -22,6 +22,24 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_16_062513) do
     t.string "name"
     t.string "img_url"
     t.index ["tournament_id"], name: "index_competitors_on_tournament_id"
+  end
+
+  create_table "matches", force: :cascade do |t|
+    t.string "group"
+    t.boolean "finished"
+    t.integer "away_score"
+    t.integer "home_score"
+    t.datetime "local_date"
+    t.integer "matchday"
+    t.string "match_type"
+    t.bigint "tournament_id", null: false
+    t.bigint "away_competitor_id"
+    t.bigint "home_competitor_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["away_competitor_id"], name: "index_matches_on_away_competitor_id"
+    t.index ["home_competitor_id"], name: "index_matches_on_home_competitor_id"
+    t.index ["tournament_id"], name: "index_matches_on_tournament_id"
   end
 
   create_table "participants", force: :cascade do |t|
@@ -77,6 +95,9 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_16_062513) do
   end
 
   add_foreign_key "competitors", "tournaments"
+  add_foreign_key "matches", "competitors", column: "away_competitor_id"
+  add_foreign_key "matches", "competitors", column: "home_competitor_id"
+  add_foreign_key "matches", "tournaments"
   add_foreign_key "participants", "competitors"
   add_foreign_key "participants", "sweepstakes"
   add_foreign_key "participants", "users"
