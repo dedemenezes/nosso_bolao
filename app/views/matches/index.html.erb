@@ -6,6 +6,6 @@
   </div>
   <%= render 'shared/sweepstake_navigation', tournament: @tournament %>
   <% @matches.each do |match| %>
-    <%= render 'matches/index/match', match: match %>
+    <%= render 'matches/index/match', match: match, match_bet: @match_bet %>
   <% end %>
 </div>

@@ -5,4 +5,8 @@ Rails.application.routes.draw do
     resources :matches, only: :index
   end
   resources :participants, only: %i[new create]
+
+  resources :matches, only: [] do
+    resources :match_bets, only: :create
+  end
 end

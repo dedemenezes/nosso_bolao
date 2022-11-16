@@ -7,20 +7,21 @@
       <div class="row">
         <%= render 'matches/index/teams', match: match %>
         <div class="col-4">
-          <form action="#" class='row'>
+          <%= simple_form_for [match, match_bet], html: { class: 'row' } do |f| %>
             <div class="col-6">
               <div class="mb-3">
-                <label for="homeTeam" class="form-label">Home</label>
-                <input type="home_score" class="form-control" id="homeTeam" aria-describedby="homeTeamScore">
+                <%= f.input :home_score, label: 'Home', input_html: { min: 0, step: 1 } %>
               </div>
             </div>
             <div class="col-6">
               <div class="mb-3">
-                <label for="awayTeam" class="form-label">Away</label>
-                <input type="away_score" class="form-control" id="awayTeam" aria-describedby="awayTeamScore">
+                <%= f.input :away_score, label: 'Away', input_html: { min: 0, step: 1 } %>
               </div>
             </div>
-          </form>
+            <div class="col-12 text-center">
+              <%= f.submit %>
+            </div>
+          <% end %>
         </div>
         <%= render 'matches/index/local_date', match: match %>
       </div>
