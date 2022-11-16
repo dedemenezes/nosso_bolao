@@ -1,0 +1,8 @@
+<div class="container">
+  <%= simple_form_for [@sweepstake, @participant] do |f| %>
+    <%= f.association :competitor %>
+    <%= f.input :price, disabled: true, placeholder: '50,00' %>
+    <%= f.input :paid %>
+    <%= f.submit %>
+  <% end %>
+</div>
