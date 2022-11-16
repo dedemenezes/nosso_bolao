@@ -4,4 +4,5 @@ Rails.application.routes.draw do
   resources :sweepstakes, only: :show do
     resources :participants, only: %i[new create]
   end
+  resources :matches, only: :index
 end
