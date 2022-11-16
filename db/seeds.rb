@@ -24,6 +24,7 @@ end
 
 puts 'Cleaning DB...'
 if Rails.env.development?
+  MatchBet.destroy_all
   Match.destroy_all
   Participant.destroy_all
   Competitor.destroy_all
