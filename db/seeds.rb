@@ -5,6 +5,9 @@
 #
 #   movies = Movie.create([{ name: "Star Wars" }, { name: "Lord of the Rings" }])
 #   Character.create(name: "Luke", movie: movies.first)
+require 'open-uri'
+require 'json'
+
 def fetch_api(url)
   response = URI.open(url,
     "Authorization" => "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MzczZmRkOWZkOWFhYzIyNjcxNjI3MGUiLCJpYXQiOjE2Njg1NjA0NjIsImV4cCI6MTY2ODY0Njg2Mn0.KtyQggiAL1s3VxeMxrIsj1ZT_XjnUUcZffOHuXHB8_s"
@@ -33,7 +36,7 @@ Tournament.destroy_all
 Team.destroy_all
 User.destroy_all
 
-  # ====================================
+# ====================================
 
 puts 'Start seeds..'
 
