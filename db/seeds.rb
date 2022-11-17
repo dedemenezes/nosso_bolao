@@ -10,7 +10,7 @@ require 'json'
 
 def fetch_api(url)
   response = URI.open(url,
-    "Authorization" => "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MzczZmRkOWZkOWFhYzIyNjcxNjI3MGUiLCJpYXQiOjE2Njg1NjA0NjIsImV4cCI6MTY2ODY0Njg2Mn0.KtyQggiAL1s3VxeMxrIsj1ZT_XjnUUcZffOHuXHB8_s"
+    "Authorization" => "Bearer #{ENV['WORLD_CUP_API_KEY']}"
   )
   JSON.parse(response.read)
 end
